@@ -1,0 +1,24 @@
+{
+  "name": "atividade-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server.js"
+  },
+  "author": "Luiz Ricardo e Bruno vieira",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.15.0",
+    "bootstrap": "^5.1.0",
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
+    "pg": "^8.7.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
