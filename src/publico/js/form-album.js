@@ -2,8 +2,12 @@
  * Validações na página quanto ao seu preenchimento
  */
 $(function () {
+  var nomeresp = document.getElementById('nomeresp');
+  var cpfresp = document.getElementById('cpfresp');
+  var cpf = document.getElementById('cpf');
   //Esconde os campos do responsável pelo menor de idade
   $('#div-resp').hide();
+  $('#div-maior').hide();
 
   //Menor de idade (VALIDAR COM A DATA DO SERVIDOR)
   $('#dataNascimento').on('blur',function () {
@@ -18,8 +22,15 @@ $(function () {
     //mostra campos caso seja menor de idade
     if (ano < 18) {
       $('#div-resp').show();
+      $("#nomeresp").attr("required", "req");
+      $("#cpfresp").attr("required", "req");
+      //campo CPF
+      $('#div-maior').hide();
     } else {
       $('#div-resp').hide();
+      //campo CPF
+      $('#div-maior').show();
+      $("#cpf").attr("required", "req");
     }
   });
 });
@@ -29,25 +40,6 @@ $(function(){
   $("#footer").load("/views/footer.html");
 });
 
-
-(function () {
-  'use strict'
-
- 
-  var forms = document.querySelectorAll('.needs-validation')
-
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
 /**
  * Validações no formulário HTML para garantir integridade antes da submissão do formulario
  */

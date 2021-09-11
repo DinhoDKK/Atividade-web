@@ -11,6 +11,7 @@
   <script src="/bsjs/bootstrap.min.js"></script>
   <script src="/popperjs/popper.min.js"></script>
   <script src="/publico/js/form-album.js"></script>
+  <script src="/publico/js/form-validation.js"></script>
 
   <title>Album Digital</title>
 </head>
@@ -23,7 +24,7 @@
       <h2>Álbum Digital</h2>
     </div>
 
-    <form id="dataForm" name="dataForm" class="needs-validation" novalidate action="/album-digital" method="POST" onsubmit="return validarFormulario()">
+    <form id="dataForm" name="dataForm" action="/album-digital" method="POST" onsubmit="return validarFormulario()">
       <div class="form-album">
         <div class="div-tab" id="dados-pessoais">
           <div class="tab-content">
@@ -31,38 +32,29 @@
             <div class="mb-3">
               <label for="nome" class="form-label">Nome</label>
               <input type="text" class="form-control" id="nome" name="nome" required>
-              <div class="invalid-feedback">
-                Deve ser inserido um nome valido
-              </div>
+              <span class='msg-erro msg-nome'></span>
             </div>
 
-            <div class="row">
-
-              <div class="col">
-                <label for="cpf" class="form-label">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" required>
-                <div class="invalid-feedback">
-                  Deve ser inserido um CPF valido
-                </div>
-              </div>
-
-              <div class="col">
+              <div class="mb-3">
                 <label for="data" class="form-label">Data de nascimento</label>
                 <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" required>
+                <span class='msg-erro msg-dataNascimento'></span>
                 <br>
-                <div class="invalid-feedback">
-                  Deve ser inserido sua data de nascimento
-                </div>
+                
               </div>
 
-            </div>
+              <div class="mb-3">
+                <div class="div-maior" id="div-maior">
+                <label for="cpf" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="cpf" name="cpf">
+                <span class='msg-erro msg-cpf'></span>
+                </div>
+              </div>
 
             <div class="mb-3">
               <label for="email" class="form-label">E-mail</label>
               <input type="email" class="form-control" id="email" name="email" required>
-              <div class="invalid-feedback">
-                Deve ser inserido um E-mail valido
-              </div>
+              <span class='msg-erro msg-email'></span>
             </div>
 
             <div class="row">
@@ -70,41 +62,46 @@
               <div class="col">
                 <label for="cpf" class="form-label">Telefone / Whatsapp</label>
                 <input type="phone" class="form-control" id="telefone" name="telefone" required>
-                <div class="invalid-feedback">
-                  Deve ser inserido um telefone valido
-                </div>
+                <span class='msg-erro msg-telefone'></span>
               </div>
 
               <div class="col">
                 <label for="estado" class="form-label">Estado</label>
-                <select name="estado" class="form-select form-select-sm" aria-label=".form-select-sm example" required>
-                  <option value="ms" selected>MS</option>
+                <select name="estado" id="estado" class="form-select form-select-sm" aria-label=".form-select-sm example" required>
+                  <option value="" selected></option>
+                  <option value="ms">MS</option>
                 </select>
+                <span class='msg-erro msg-estado'></span>
               </div>
 
             </div>
 
             <div class="mb-3">
               <label for="cidade" class="form-label">Cidade</label>
-              <select name="cidade" class="form-select form-select-sm" aria-label=".form-select-sm example" required>
-                <option selected>Campo Grande</option>
-                <option selected>Aquidauana</option>
-                <option selected>Três Lagoas</option>
-                <option selected>Jardim</option>
-                <option selected>Nova Andradina</option>
-              </select><br>
+              <select name="cidade" id="cidade" class="form-select form-select-sm" aria-label=".form-select-sm example" required>
+                <option value="" selected></option>
+                <option value="CG">Campo Grande</option>
+                <option value="AQ">Aquidauana</option>
+                <option value="TL">Três Lagoas</option>
+                <option value="JD">Jardim</option>
+                <option value="NA">Nova Andradina</option>
+              </select>
+              <span class='msg-erro msg-cidade'></span>
+              <br>
             </div>
 
             <div class="div-resp" id="div-resp">
               <h5>Para menores de idade:</h5>
               <div class="mb-3" id="div-nome-responsavel">
                 <label for="nomeresp" class="form-label">Nome do responsavél:</label>
-                <input type="text" class="form-control" id="nomeresp" name="nomeresp">
+                <input type="text" class="form-control" id="nomeresp" name="nomeresp" >
+                <span class='msg-erro msg-nomeresp'></span>
               </div>
 
               <div class="mb-3" id="div-cpf-responsavel">
                 <label for="cpfresp" class="form-label">CPF do responsavél</label>
-                <input type="text" class="form-control" id="cpfresp" name="cpfresp">
+                <input type="text" class="form-control" id="cpfresp" name="cpfresp" >
+                <span class='msg-erro msg-cpfresp'></span>
               </div>
             </div>
             <br>
@@ -149,11 +146,13 @@
             <div class="col">
               <label for="titulo" class="form-label">Titulo da foto</label>
               <input type="text" class="form-control" id="titulo" name="titulo" required>
+              <span class='msg-erro msg-titulo'></span>
             </div>
 
             <div class="col">
               <label for="nome-fotogra" class="form-label">Nome do(a) Fotográfo(a):</label>
-              <input type="text" class="form-control" id="nomeFotogra" name="nomeFotogra" required>
+              <input type="text" class="form-control" id="nomeFotogra" name="nomeFotogra" required >
+              <span class='msg-erro msg-nomeFotogra'></span>
             </div>
 
           </div>
@@ -161,6 +160,7 @@
           <div class="mb-3">
             <label for="foto" class="form-label">Foto</label>
             <input class="form-control" type="file" id="foto" name="foto" required>
+            <span class='msg-erro msg-foto'></span>
           </div>
 
           <div class="row">
@@ -170,9 +170,7 @@
               <label class="form-check-label" for="termo">
                 Li o termo e autorizo o uso da minha imagem
               </label>
-              <div class="invalid-feedback">
-                Para prosseguir deve-se ler e aceitar os termos
-              </div>
+              <span class='msg-erro msg-termo'></span>
             </div>
 
             <div class="col-md-9">
@@ -198,6 +196,7 @@
     <input type='submit' />
   </form>
   <div id="footer"></div>
+  
 </body>
 
 </html>
